@@ -9,14 +9,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#000000">
   <meta name="description" content="A minimalist PWA to define goals, build habits, and track progress.">
 
   <!-- Icons -->
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon.png">
 </head>
 <body class="bg-gray-50 text-gray-900">
   <!-- Main App Container -->
@@ -25,7 +25,7 @@
   </div>
 
   <!-- Main App Entry Point -->
-  <script type="module" src="/js/router.js"></script>
+  <script type="module" src="./js/router.js"></script>
 
   <!-- Global Reset Function (for debugging) -->
   <script>
@@ -41,7 +41,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then(
+        navigator.serviceWorker.register('./service-worker.js').then(
           registration => {
             console.log('Service Worker registered with scope:', registration.scope);
           },
