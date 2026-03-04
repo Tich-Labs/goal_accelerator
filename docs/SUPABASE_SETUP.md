@@ -1,49 +1,94 @@
-# 🚀 Supabase Setup Guide
+# 🔌 Supabase Connection Guide
 
-## Prerequisites
-- Supabase account (free tier available at https://supabase.com)
-- GitHub account
-- Node.js & npm installed
+Complete step-by-step guide to set up Supabase and connect it to Goal Accelerator.
 
 ---
 
-## Step 1: Create Supabase Project
+## Step 1: Create Supabase Project ⏱️ (5 minutes)
 
-1. Go to [supabase.com](https://supabase.com)
-2. Click **"New Project"**
-3. Fill in:
-   - **Project Name**: `goal-accelerator`
-   - **Database Password**: Create a strong password
-   - **Region**: Choose closest to you
-4. Click **"Create new project"** (takes 2-3 minutes)
+### 1.1 Sign Up / Login
+- Go to: https://supabase.com
+- Click **"Sign in"** or **"Start your project"**
+- Sign in with GitHub or email
 
----
+### 1.2 Create New Project
+- Click **"New Project"**
+- Fill in:
+  - **Project Name**: `goal-accelerator`
+  - **Database Password**: Create a strong password (save this!)
+  - **Region**: Choose closest to you
+- Click **"Create new project"**
+- ⏳ Wait 2-3 minutes for project to initialize
 
-## Step 2: Get Your Credentials
-
-1. Once project is created, go to **Settings → API**
-2. Copy your:
-   - **Project URL** (looks like `https://xxxxx.supabase.co`)
-   - **anon public** key
-3. Update `js/supabase-config.js`:
-   ```javascript
-   const SUPABASE_URL = 'YOUR_URL_HERE';
-   const SUPABASE_ANON_KEY = 'YOUR_KEY_HERE';
-   ```
+### 1.3 Verify Project Created
+- You'll see a "Project is being set up" message
+- Once ready, you'll see the Supabase dashboard
 
 ---
 
-## Step 3: Create Database Tables
+## Step 2: Get Your Credentials ⏱️ (2 minutes)
 
-In Supabase, go to **SQL Editor** and run these queries:
+### 2.1 Find API Settings
+1. In Supabase dashboard, go to **Settings** (left sidebar)
+2. Click **"API"**
+3. You'll see two keys to copy:
+   - **Project URL** (looks like: `https://xxxxx.supabase.co`)
+   - **anon public** key (a long string)
 
-### 1. Users (handled by Supabase Auth)
-```sql
--- Supabase Auth automatically creates users table
--- Just enable Email authentication in Authentication → Providers
+### 2.2 Copy the Values
+```
+Project URL: https://xxxxx.supabase.co
+Anon Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
-### 2. Yearly Goals
+---
+
+## Step 3: Add Credentials to App ⏱️ (1 minute)
+
+### 3.1 Open File
+Edit: `js/supabase-config.js`
+
+### 3.2 Replace Placeholder Values
+Find these lines (around line 8-9):
+```javascript
+const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+```
+
+Replace with **your actual values** from Step 2:
+```javascript
+const SUPABASE_URL = 'https://yourproject.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+```
+
+### 3.3 Save File
+- Save and close the file
+
+---
+
+## Step 4: Enable Email Authentication ⏱️ (2 minutes)
+
+### 4.1 Go to Authentication
+1. In Supabase dashboard, click **"Authentication"** (left sidebar)
+2. Click **"Providers"**
+3. Find **"Email"** and make sure it's **enabled** (toggle switch ON)
+
+### 4.2 Configure Email Settings (Optional)
+- You can leave defaults or customize
+- Make sure "Confirm email" is enabled for security
+
+---
+
+## Step 5: Create Database Tables ⏱️ (10 minutes)
+
+### 5.1 Open SQL Editor
+1. Click **"SQL Editor"** (left sidebar)
+2. Click **"New Query"**
+3. Copy-paste each query below, one at a time
+
+### 5.2 Run These 5 SQL Queries
+
+**Query 1: Yearly Goals Table**
 ```sql
 CREATE TABLE yearly_goals (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -66,7 +111,7 @@ CREATE POLICY "Users can only see their own goals"
   USING (auth.uid() = user_id);
 ```
 
-### 3. Habits
+**Query 2: Habits Table**
 ```sql
 CREATE TABLE habits (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -86,7 +131,7 @@ CREATE POLICY "Users can only see their own habits"
   USING (auth.uid() = user_id);
 ```
 
-### 4. Habit Logs
+**Query 3: Habit Logs Table**
 ```sql
 CREATE TABLE habit_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -106,14 +151,14 @@ CREATE POLICY "Users can only see their own habit logs"
   USING (auth.uid() = user_id);
 ```
 
-### 5. Reflections
+**Query 4: Reflections Table**
 ```sql
 CREATE TABLE reflections (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   year INT NOT NULL,
   month INT,
-  type TEXT NOT NULL, -- 'weekly', 'monthly', 'yearly'
+  type TEXT NOT NULL,
   content JSONB NOT NULL,
   created_at TIMESTAMP DEFAULT NOW()
 );
@@ -126,83 +171,154 @@ CREATE POLICY "Users can only see their own reflections"
   USING (auth.uid() = user_id);
 ```
 
----
+**Query 5: Year Settings Table**
+```sql
+CREATE TABLE year_settings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  year INT NOT NULL,
+  success_definition TEXT,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(user_id, year)
+);
 
-## Step 4: Enable Authentication
+ALTER TABLE year_settings ENABLE ROW LEVEL SECURITY;
 
-1. Go to **Authentication → Providers**
-2. Make sure **Email** is enabled
-3. Go to **Authentication → Redirect URLs**
-4. Add these URLs:
-   - Local: `http://localhost:8080`
-   - GitHub Pages: `https://YOUR_USERNAME.github.io/goal_accelerator`
+CREATE POLICY "Users can only see their own settings"
+  ON year_settings
+  FOR ALL
+  USING (auth.uid() = user_id);
+```
 
----
+### 5.3 Execute Queries
+For each query:
+1. Paste the SQL code in the editor
+2. Click **"Run"** (or Cmd+Enter)
+3. Wait for "Query executed successfully" message
+4. Clear and move to next query
 
-## Step 5: Deploy to GitHub Pages
-
-1. Push code to GitHub:
-   ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/goal_accelerator.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-2. Go to GitHub repo → **Settings → Pages**
-3. Under "Build and deployment":
-   - Source: **Deploy from a branch**
-   - Branch: **main** / **root**
-4. Click **Save**
-
-5. Your app is now live at: `https://YOUR_USERNAME.github.io/goal_accelerator`
+✅ All 5 tables should be created
 
 ---
 
-## Step 6: Test Everything
+## Step 6: Configure Redirect URLs ⏱️ (2 minutes)
 
-1. Visit your GitHub Pages URL
-2. Create a new account (email & password)
-3. Complete the onboarding
-4. Add goals and track habits
-5. Check Supabase dashboard to see data being saved
+### 6.1 Go to Authentication Settings
+1. Click **"Authentication"** (left sidebar)
+2. Click **"URL Configuration"**
+3. Under "Redirect URLs", click **"Add URL"**
 
----
+### 6.2 Add Local URL
+```
+http://localhost:8080
+```
+Click **"Add URL"**
 
-## 📋 Troubleshooting
+### 6.3 Add Production URL
+```
+https://YOUR_USERNAME.github.io/goal_accelerator
+```
+Click **"Add URL"**
 
-### "Invalid credentials" error
-- Check your Supabase URL and anon key in `supabase-config.js`
-- Make sure Email authentication is enabled
-
-### Data not saving
-- Check RLS policies are enabled in Supabase
-- Verify tables were created correctly
-- Check browser console for errors (F12)
-
-### GitHub Pages not updating
-- Wait 2-3 minutes for deployment
-- Hard refresh (Ctrl+Shift+R)
-- Check "Actions" tab in GitHub for deployment status
+Replace `YOUR_USERNAME` with your actual GitHub username!
 
 ---
 
-## 🔐 Security Notes
+## Step 7: Test Connection ⏱️ (5 minutes)
 
-- **anon key** is safe to expose (public key)
-- RLS policies protect data (users can only see their own)
-- Never commit private keys to GitHub
-- Store secrets in GitHub Secrets for CI/CD
+### 7.1 Start Local Server
+```bash
+npm run serve
+```
+
+### 7.2 Open App
+- Visit: http://localhost:8080
+- You should see login screen (not onboarding)
+
+### 7.3 Create Test Account
+1. Click **"Sign Up"**
+2. Enter: `test@example.com` / `password123`
+3. Should show success message or redirect
+
+### 7.4 Check Supabase
+1. Go back to Supabase dashboard
+2. Click **"Authentication"** → **"Users"**
+3. You should see your test user created! ✅
 
 ---
 
-## Next Steps
+## ✅ Verification Checklist
 
-- [ ] Create Supabase project
-- [ ] Get credentials
-- [ ] Create tables
-- [ ] Enable authentication
-- [ ] Push to GitHub
-- [ ] Deploy to GitHub Pages
-- [ ] Test full flow
+After completing all steps, verify:
 
-Happy habit tracking! 🎯
+- [ ] Step 1: Supabase project created
+- [ ] Step 2: Got Project URL & Anon Key
+- [ ] Step 3: Updated `js/supabase-config.js` with credentials
+- [ ] Step 4: Email authentication enabled
+- [ ] Step 5: All 5 SQL tables created (check Supabase "Tables" menu)
+- [ ] Step 6: Redirect URLs configured
+- [ ] Step 7: Test account created successfully
+- [ ] Step 7: User appears in Supabase authentication
+
+**If all checked ✅ → Supabase is connected!**
+
+---
+
+## 🆘 Troubleshooting
+
+### "Invalid credentials" Error
+- **Solution:** Check `js/supabase-config.js` has correct URL and key
+- Verify you copied the EXACT values from Supabase
+- No extra spaces or quotes
+
+### "Failed to create user"
+- **Solution:** Check email authentication is ENABLED
+- Verify password is 6+ characters
+- Check email format is valid
+
+### "Can't see user in Supabase"
+- **Solution:** Refresh the Supabase dashboard
+- Make sure you're in right project
+- Check the "Users" tab under Authentication
+
+### SQL Query Fails
+- **Solution:** Check syntax carefully
+- Copy entire query block including ALTER statements
+- Run one query at a time
+- Check for typos in table names
+
+### Tables Not Appearing
+- **Solution:** Go to Supabase "SQL Editor"
+- Click "Database" → "Tables" to see all tables
+- Refresh if needed
+- Check project is correct
+
+---
+
+## 🎉 You're Connected!
+
+Your Goal Accelerator is now:
+- ✅ Connected to Supabase cloud
+- ✅ Using real authentication
+- ✅ Storing data in cloud database
+- ✅ Ready for multi-device sync
+- ✅ Production ready!
+
+**Next:** Deploy to GitHub Pages following [GITHUB_PAGES_DEPLOYMENT.md](./GITHUB_PAGES_DEPLOYMENT.md)
+
+---
+
+## 📚 Reference
+
+| What | Where |
+|------|-------|
+| Project URL | Supabase → Settings → API |
+| Anon Key | Supabase → Settings → API |
+| Create tables | Supabase → SQL Editor |
+| View users | Supabase → Authentication → Users |
+| View data | Supabase → Table Editor |
+| Configure auth | Supabase → Authentication → Providers |
+
+---
+
+**Questions? Check docs/COMPLETE_GUIDE.md for more details!**

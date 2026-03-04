@@ -1,0 +1,40 @@
+# 🚀 Push to GitHub
+
+Run these commands in your terminal:
+
+```bash
+cd /home/tich/IdeaProjects/Habit_tracker_V2026
+
+# Add all changes
+git add .
+
+# Commit with message
+git commit -m "docs: add Supabase setup guides and quick start"
+
+# Push to main branch
+git push origin master:main
+
+# Verify
+echo "✅ Pushed to GitHub!"
+```
+
+---
+
+## What This Does
+
+1. ✅ Adds all the Supabase setup documentation
+2. ✅ Creates quick start guide for easy reference
+3. ✅ Pushes to GitHub main branch
+4. ✅ Your repo is now up to date
+
+---
+
+## After Pushing
+
+1. Go to: https://github.com/Tich-Labs/goal_accelerator
+2. You should see the new docs
+3. Main branch should have latest code
+
+---
+
+**Copy and paste the commands above!** 🎯

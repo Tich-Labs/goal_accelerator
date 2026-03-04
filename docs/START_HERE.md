@@ -16,30 +16,39 @@ A minimalist, mobile-first PWA that helps you:
 
 ---
 
-## 🚀 Deploy in 3 Steps
+## 🚀 Setup in 3 Phases
 
-### Step 1: Read Overview (5 min)
-You're reading it!
-
-### Step 2: Follow Setup Guide (30 min)
-[IMPLEMENTATION_CHECKLIST.md](./IMPLEMENTATION_CHECKLIST.md)
+### Phase 1: Connect Supabase (20 min)
+[SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
 - Create Supabase project
-- Configure cloud
-- Deploy to GitHub Pages
+- Add credentials to app
+- Create database tables
+- Configure authentication
 
-### Step 3: Go Live! (5 min)
-Your app is live at: `https://YOUR_USERNAME.github.io/goal_accelerator`
+### Phase 2: Test Locally (10 min)
+```bash
+npm run serve
+# Visit http://localhost:8080
+# Create test account
+```
+
+### Phase 3: Deploy (5 min)
+[GITHUB_PAGES_DEPLOYMENT.md](./GITHUB_PAGES_DEPLOYMENT.md)
+- Push to GitHub
+- Enable GitHub Pages
+- Configure redirect URLs
+- Done! 🎉
 
 ---
 
-## 📚 Documentation Map
+## 📚 Quick Links
 
 | Need | File |
 |------|------|
-| **Quick setup** | [IMPLEMENTATION_CHECKLIST.md](./IMPLEMENTATION_CHECKLIST.md) |
+| **Supabase setup** | [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) ← START HERE |
+| **Detailed setup steps** | [IMPLEMENTATION_CHECKLIST.md](./IMPLEMENTATION_CHECKLIST.md) |
 | **Quick reference** | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) |
-| **Cloud setup** | [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) |
-| **Deployment** | [GITHUB_PAGES_DEPLOYMENT.md](./GITHUB_PAGES_DEPLOYMENT.md) |
+| **Deployment guide** | [GITHUB_PAGES_DEPLOYMENT.md](./GITHUB_PAGES_DEPLOYMENT.md) |
 | **Full user guide** | [COMPLETE_GUIDE.md](./COMPLETE_GUIDE.md) |
 | **Architecture** | [TECH_STACK.md](./TECH_STACK.md) |
 
@@ -59,9 +68,9 @@ After setup:
 
 ## 🎯 Next Step
 
-👉 **Read:** [IMPLEMENTATION_CHECKLIST.md](./IMPLEMENTATION_CHECKLIST.md)
+👉 **Read:** [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
 
-It has your exact 7-step setup with time estimates.
+It has all 7 steps with time estimates.
 
 ---
 
