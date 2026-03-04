@@ -7,8 +7,9 @@ export function renderDashboard(container) {
   const habitLogs = JSON.parse(localStorage.getItem('habitLogs') || '{}');
   const monthlyGoals = JSON.parse(localStorage.getItem('monthlyGoals') || '{}');
   const dailyHabits = JSON.parse(localStorage.getItem('dailyHabits') || '{}');
+  const successDefinition = localStorage.getItem('successDefinition') || '';
 
-  // Calculate metrics
+  // ...existing code...
   const today = new Date();
   const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
   const currentDay = today.getDate();
@@ -148,6 +149,14 @@ export function renderDashboard(container) {
           <h1 class="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
           <p class="text-gray-600">Track your progress across all goals and life areas</p>
         </div>
+
+        <!-- Your Success Definition -->
+        ${successDefinition ? `
+          <div class="mb-8 bg-gradient-to-r from-purple-50 to-blue-50 border-l-4 border-purple-500 rounded-lg p-6 shadow-sm">
+            <h2 class="text-lg font-bold text-gray-900 mb-2">✨ Your Definition of Success</h2>
+            <p class="text-gray-700 italic">"${successDefinition}"</p>
+          </div>
+        ` : ''}
 
         <!-- Key Metrics -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">

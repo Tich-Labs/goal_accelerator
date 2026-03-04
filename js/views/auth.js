@@ -53,12 +53,21 @@ function renderLoginPage(container) {
           <!-- Password Input -->
           <div class="mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="••••••••"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                id="toggle-password"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                title="Show/hide password">
+                👁️
+              </button>
+            </div>
           </div>
 
           <!-- Sign In Button -->
@@ -89,6 +98,20 @@ function renderLoginPage(container) {
   `;
 
   // Event listeners
+  const passwordInput = document.getElementById('password');
+  const toggleBtn = document.getElementById('toggle-password');
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      toggleBtn.textContent = '🙈';
+    } else {
+      passwordInput.type = 'password';
+      toggleBtn.textContent = '👁️';
+    }
+  });
+
   document.getElementById('signin-btn').addEventListener('click', async () => {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
@@ -154,24 +177,42 @@ function renderSignupPage(container) {
           <!-- Password Input -->
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="••••••••"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                id="toggle-password"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                title="Show/hide password">
+                👁️
+              </button>
+            </div>
             <p class="text-xs text-gray-500 mt-1">At least 6 characters</p>
           </div>
 
           <!-- Confirm Password -->
           <div class="mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm-password"
-              placeholder="••••••••"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="••••••••"
+                class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                id="toggle-confirm-password"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                title="Show/hide password">
+                👁️
+              </button>
+            </div>
           </div>
 
           <!-- Sign Up Button -->
@@ -201,7 +242,34 @@ function renderSignupPage(container) {
     </div>
   `;
 
-  // Event listeners
+  // Event listeners for password toggles
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirm-password');
+  const togglePasswordBtn = document.getElementById('toggle-password');
+  const toggleConfirmBtn = document.getElementById('toggle-confirm-password');
+
+  togglePasswordBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      togglePasswordBtn.textContent = '🙈';
+    } else {
+      passwordInput.type = 'password';
+      togglePasswordBtn.textContent = '👁️';
+    }
+  });
+
+  toggleConfirmBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (confirmPasswordInput.type === 'password') {
+      confirmPasswordInput.type = 'text';
+      toggleConfirmBtn.textContent = '🙈';
+    } else {
+      confirmPasswordInput.type = 'password';
+      toggleConfirmBtn.textContent = '👁️';
+    }
+  });
+
   document.getElementById('signup-btn').addEventListener('click', async () => {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;

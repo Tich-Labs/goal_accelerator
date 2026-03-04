@@ -13,26 +13,34 @@ let onboardingState = {
 // Step 1: Define Success
 function renderDefineSuccess(container) {
   container.innerHTML = `
-    <div class="max-w-2xl mx-auto p-6">
-      <h1 class="text-4xl font-bold mb-4 text-center">Welcome to Goal Accelerator</h1>
-      <p class="text-center text-gray-600 mb-8">Let's define what success means to you this year.</p>
-
-      <form id="success-form">
-        <textarea
-          id="success-input"
-          class="w-full h-48 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="What would make this year successful for you? Be honest and specific...">
-        </textarea>
-
-        <div class="mt-6 flex justify-end">
-          <button
-            type="button"
-            id="next-to-wheel"
-            class="bg-blue-600 text-white px-8 py-2 rounded-lg hover:bg-blue-700 transition">
-            Next
-          </button>
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="text-6xl mb-4">🎯</div>
+          <h1 class="text-4xl font-bold mb-4 text-gray-900">Welcome to Goal Accelerator</h1>
+          <p class="text-lg text-gray-600">Let's define what success means to you this year.</p>
         </div>
-      </form>
+
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <form id="success-form">
+            <label class="block text-sm font-medium text-gray-700 mb-3">Your Definition of Success</label>
+            <textarea
+              id="success-input"
+              class="w-full h-48 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="What would make this year successful for you? Be honest and specific...">
+            </textarea>
+
+            <div class="mt-6 flex justify-end">
+              <button
+                type="button"
+                id="next-to-wheel"
+                class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
+                Next →
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   `;
 
@@ -279,7 +287,6 @@ function renderYearlyGoals(container) {
           type="button"
           id="next-to-planning"
           class="bg-blue-600 text-white px-8 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
-          class="bg-green-600 text-white px-8 py-2 rounded-lg hover:bg-green-700 transition">
           Next →
         </button>
       </div>
@@ -368,7 +375,7 @@ function renderAreaSelection(container) {
           id="continue-to-goals"
           class="bg-blue-600 text-white px-8 py-2 rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           ${onboardingState.selectedAreas.length !== 6 ? 'disabled' : ''}>
-          Next →
+          Next → (${onboardingState.selectedAreas.length}/6)
         </button>
       </div>
     </div>
@@ -397,6 +404,7 @@ function renderAreaSelection(container) {
   });
 
   document.getElementById('continue-to-goals').addEventListener('click', () => {
+    console.log('Continue to goals clicked. Selected areas:', onboardingState.selectedAreas.length);
     if (onboardingState.selectedAreas.length === 6) {
       // Initialize yearlyGoals array with selected areas
       onboardingState.yearlyGoals = onboardingState.selectedAreas.map(index => ({
@@ -405,7 +413,10 @@ function renderAreaSelection(container) {
         title: '',
         why: ''
       }));
+      console.log('Moving to yearly goals...');
       renderYearlyGoals(container);
+    } else {
+      console.log('Button clicked but only', onboardingState.selectedAreas.length, 'areas selected. Need 6!');
     }
   });
 }

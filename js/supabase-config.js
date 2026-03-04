@@ -5,11 +5,17 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 // ⚠️ IMPORTANT: Add your Supabase URL and ANON KEY from Supabase dashboard
 // Project Settings → API → URL and anon key
-const SUPABASE_URL = 'https://jqhnuglcvrjcydqrzdmzmc.supabase.co';
+const SUPABASE_URL = 'https://jqhnuglcvrcydqrzdzmc.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxaG51Z2xjdnJjeWRxcnpkem1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2NjI0MzgsImV4cCI6MjA4ODIzODQzOH0.VuwF0AwY9hUvje1qIoNGpwV7zuChkqpa74fv1WlZRsw';
 
 // Create Supabase client
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Verify connection on load
+console.log('🔌 Supabase initialized with URL:', SUPABASE_URL);
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error('❌ ERROR: Supabase credentials are missing! Check supabase-config.js');
+}
 
 // Authentication helper functions
 export async function signUp(email, password) {
