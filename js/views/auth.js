@@ -29,7 +29,75 @@ function renderLoginPage(container) {
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <!-- Left Column: Login Form -->
+          <!-- Left Column: App Overview -->
+          <div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">How It Works</h2>
+
+            <div class="space-y-4">
+              <!-- Step 1 -->
+              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600 font-bold text-lg">1</div>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 text-lg">Define Your Success</h3>
+                  <p class="text-gray-600 text-sm mt-1">Write down what a successful year looks like for you</p>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-purple-100 text-purple-600 font-bold text-lg">2</div>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 text-lg">Assess Your Life Areas</h3>
+                  <p class="text-gray-600 text-sm mt-1">Rate yourself on 8 life categories (Health, Career, Relationships, etc.)</p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-green-100 text-green-600 font-bold text-lg">3</div>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 text-lg">Set Your Goals</h3>
+                  <p class="text-gray-600 text-sm mt-1">Choose up to 6 yearly goals from your life areas</p>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-100 text-amber-600 font-bold text-lg">4</div>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 text-lg">Plan & Track</h3>
+                  <p class="text-gray-600 text-sm mt-1">Break goals into monthly milestones and daily habits</p>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                <div class="flex-shrink-0">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-pink-100 text-pink-600 font-bold text-lg">5</div>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 text-lg">Reflect & Grow</h3>
+                  <p class="text-gray-600 text-sm mt-1">Weekly, monthly, and yearly reflections to track progress</p>
+                </div>
+              </div>
+
+              <!-- CTA -->
+              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-6 mt-6">
+                <p class="text-gray-900 font-semibold">Ready to achieve your goals?</p>
+                <p class="text-gray-600 text-sm mt-2">Sign up on the right and start your journey today!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Login Form -->
           <div>
             <div class="bg-white rounded-xl shadow-lg p-8 sticky top-8">
               <h2 class="text-2xl font-bold text-gray-900 mb-6">Sign In</h2>
@@ -93,74 +161,6 @@ function renderLoginPage(container) {
                 <p class="text-xs text-blue-900">
                   <strong>Demo:</strong> Use any email and password. Data stored securely with Supabase.
                 </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column: App Overview -->
-          <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">How It Works</h2>
-
-            <div class="space-y-4">
-              <!-- Step 1 -->
-              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600 font-bold text-lg">1</div>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 text-lg">Define Your Success</h3>
-                  <p class="text-gray-600 text-sm mt-1">Write down what a successful year looks like for you</p>
-                </div>
-              </div>
-
-              <!-- Step 2 -->
-              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-purple-100 text-purple-600 font-bold text-lg">2</div>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 text-lg">Assess Your Life Areas</h3>
-                  <p class="text-gray-600 text-sm mt-1">Rate yourself on 8 life categories (Health, Career, Relationships, etc.)</p>
-                </div>
-              </div>
-
-              <!-- Step 3 -->
-              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-green-100 text-green-600 font-bold text-lg">3</div>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 text-lg">Set Your Goals</h3>
-                  <p class="text-gray-600 text-sm mt-1">Choose up to 6 yearly goals from your life areas</p>
-                </div>
-              </div>
-
-              <!-- Step 4 -->
-              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-100 text-amber-600 font-bold text-lg">4</div>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 text-lg">Plan & Track</h3>
-                  <p class="text-gray-600 text-sm mt-1">Break goals into monthly milestones and daily habits</p>
-                </div>
-              </div>
-
-              <!-- Step 5 -->
-              <div class="flex gap-4 bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-pink-100 text-pink-600 font-bold text-lg">5</div>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900 text-lg">Reflect & Grow</h3>
-                  <p class="text-gray-600 text-sm mt-1">Weekly, monthly, and yearly reflections to track progress</p>
-                </div>
-              </div>
-
-              <!-- CTA -->
-              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-6 mt-6">
-                <p class="text-gray-900 font-semibold">Ready to achieve your goals?</p>
-                <p class="text-gray-600 text-sm mt-2">Sign up above and start your journey today!</p>
               </div>
             </div>
           </div>
