@@ -23,7 +23,7 @@ function renderDefineSuccess(container) {
 
         <!-- App Overview Section -->
         <div class="bg-white rounded-xl shadow-lg p-8 mb-10">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">How Goal Accelerator Works</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">How It Works</h2>
 
           <div class="space-y-4 mb-8">
             <div class="flex gap-4">
