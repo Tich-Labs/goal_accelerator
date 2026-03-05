@@ -222,7 +222,12 @@ function renderWheelOfLife(container) {
   });
 
   document.getElementById('next-to-goals').addEventListener('click', () => {
-    renderYearlyGoals(container);
+    // Save wheel of life data to localStorage before moving to next step
+    localStorage.setItem('wheelOfLife', JSON.stringify(onboardingState.wheelOfLife));
+    console.log('✅ Saved Wheel of Life data');
+
+    // Move to area selection (which is before goals)
+    renderAreaSelection(container);
   });
 }
 
@@ -484,6 +489,9 @@ function renderAreaSelection(container) {
   document.getElementById('continue-to-goals').addEventListener('click', () => {
     console.log('Continue to goals clicked. Selected areas:', onboardingState.selectedAreas.length);
     if (onboardingState.selectedAreas.length === 6) {
+      // Save selected areas to localStorage BEFORE moving to next step
+      localStorage.setItem('selectedAreas', JSON.stringify(onboardingState.selectedAreas));
+
       // Initialize yearlyGoals array with selected areas
       onboardingState.yearlyGoals = onboardingState.selectedAreas.map(index => ({
         area: wheelCategories[index],
@@ -491,6 +499,10 @@ function renderAreaSelection(container) {
         title: '',
         why: ''
       }));
+
+      // Save yearlyGoals to localStorage
+      localStorage.setItem('yearlyGoals', JSON.stringify(onboardingState.yearlyGoals));
+
       console.log('Moving to yearly goals...');
       renderYearlyGoals(container);
     } else {
