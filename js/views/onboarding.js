@@ -91,11 +91,7 @@ function renderDefineSuccess(container) {
 
           <form id="success-form">
             <label class="block text-sm font-medium text-gray-700 mb-3">Your Definition of Success</label>
-            <textarea
-              id="success-input"
-              class="w-full h-48 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Example: Get healthier, earn more income, spend more time with family, develop a new skill...">
-            </textarea>
+            <textarea id="success-input" class="w-full h-48 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Example: Get healthier, earn more income, spend more time with family, develop a new skill..."></textarea>
 
             <div class="mt-6 flex justify-end">
               <button

@@ -145,9 +145,16 @@ export function renderDashboard(container) {
       <div class="max-w-4xl mx-auto">
 
         <!-- Header -->
-        <div class="mb-8">
-          <h1 class="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
-          <p class="text-gray-600">Track your progress across all goals and life areas</p>
+        <div class="mb-8 flex justify-between items-start">
+          <div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
+            <p class="text-gray-600">Track your progress across all goals and life areas</p>
+          </div>
+          <button
+            id="logout-btn"
+            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition font-medium text-sm">
+            🚪 Logout
+          </button>
         </div>
 
         <!-- Your Success Definition -->
@@ -225,4 +232,17 @@ export function renderDashboard(container) {
   document.getElementById('yearly-reflection-btn').addEventListener('click', () => {
     navigateTo('yearlyReflection');
   });
-}
+
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    if (confirm('Are you sure you want to logout?')) {
+      const { signOut } = await import('../supabase-config.js');
+      const result = await signOut();
+      if (result.success) {
+        localStorage.clear();
+        navigateTo('auth');
+        console.log('✅ Logged out successfully');
+      } else {
+        alert('Logout failed: ' + result.error);
+      }
+    }
+  });

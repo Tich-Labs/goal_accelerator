@@ -38,13 +38,20 @@ export function navigateTo(viewName) {
 
 // Initialize app on load
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log('🔄 Initializing app...');
+
   // Check if user is authenticated
   const user = await getCurrentUser();
+  console.log('👤 User:', user ? `${user.email} (authenticated)` : 'Not logged in');
 
   if (user) {
     // User is logged in
+    console.log('✅ User is authenticated');
     const savedView = localStorage.getItem('currentView');
     const hasCompletedOnboarding = localStorage.getItem('onboardingComplete');
+
+    console.log('📊 Onboarding status:', hasCompletedOnboarding ? 'Complete' : 'Incomplete');
+    console.log('📍 Last view:', savedView);
 
     if (hasCompletedOnboarding) {
       navigateTo(savedView || 'month');
@@ -53,6 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   } else {
     // No user logged in, show auth screen
+    console.log('❌ No user, showing auth screen');
     navigateTo('auth');
   }
 });

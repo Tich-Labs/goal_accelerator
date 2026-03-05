@@ -128,7 +128,15 @@ function renderLoginPage(container) {
     if (result.success) {
       // Save user data and navigate to onboarding
       localStorage.setItem('authUser', JSON.stringify(result.user));
-      navigateTo('onboarding');
+      console.log('✅ Sign in successful, navigating to onboarding');
+
+      // Check if user already completed onboarding
+      const hasCompletedOnboarding = localStorage.getItem('onboardingComplete');
+      if (hasCompletedOnboarding) {
+        navigateTo('month');
+      } else {
+        navigateTo('onboarding');
+      }
     } else {
       authState.error = result.error || 'Sign in failed';
       authState.isLoading = false;
