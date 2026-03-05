@@ -247,6 +247,35 @@ export function renderSettings(container) {
           </div>
         </div>
 
+        <!-- Support & Ko-fi Section -->
+        <div class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-6 shadow-sm border-2 border-orange-300 mb-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <span>☕</span> Support Goal Accelerator
+          </h2>
+          <p class="text-gray-700 mb-4">Love Goal Accelerator? Help support development and keep it free for everyone!</p>
+          <a
+            href="https://ko-fi.com/ntoweett"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white px-6 py-3 rounded-lg font-medium transition transform hover:scale-105">
+            ☕ Buy Me a Coffee
+          </a>
+          <p class="text-xs text-gray-600 mt-3">Your support helps me continue building and improving Goal Accelerator!</p>
+        </div>
+
+        <!-- Admin Analytics -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <span>📊</span> Analytics & Admin
+          </h2>
+          <button
+            id="admin-btn"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg transition text-left font-medium">
+            📈 View Visitor Analytics Dashboard
+          </button>
+          <p class="text-xs text-gray-500 mt-3">Simple, privacy-friendly visitor tracking with anonymous IDs (No PII)</p>
+        </div>
+
         <!-- Navigation -->
         <div class="flex gap-3">
           <button
@@ -292,5 +321,9 @@ export function renderSettings(container) {
 
   document.getElementById('back-btn').addEventListener('click', () => {
     navigateTo('month');
+  });
+
+  document.getElementById('admin-btn').addEventListener('click', () => {
+    navigateTo('admin');
   });
 }

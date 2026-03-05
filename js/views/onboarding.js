@@ -15,73 +15,10 @@ function renderDefineSuccess(container) {
   container.innerHTML = `
     <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
       <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12">
           <div class="text-6xl mb-4">🎯</div>
           <h1 class="text-4xl font-bold mb-4 text-gray-900">Welcome to Goal Accelerator</h1>
           <p class="text-lg text-gray-600">Let's define what success means to you this year.</p>
-        </div>
-
-        <!-- App Overview Section -->
-        <div class="bg-white rounded-xl shadow-lg p-8 mb-10">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">How It Works</h2>
-
-          <div class="space-y-4 mb-8">
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-100 text-blue-600 font-bold">1</div>
-              </div>
-              <div>
-                <h3 class="font-semibold text-gray-900">Define Your Success</h3>
-                <p class="text-gray-600 text-sm">Write down what a successful year looks like for you</p>
-              </div>
-            </div>
-
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-purple-100 text-purple-600 font-bold">2</div>
-              </div>
-              <div>
-                <h3 class="font-semibold text-gray-900">Assess Your Life Areas</h3>
-                <p class="text-gray-600 text-sm">Rate yourself on 8 life areas (Health, Career, Relationships, etc.)</p>
-              </div>
-            </div>
-
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-green-100 text-green-600 font-bold">3</div>
-              </div>
-              <div>
-                <h3 class="font-semibold text-gray-900">Set Your Goals</h3>
-                <p class="text-gray-600 text-sm">Choose up to 6 yearly goals (one per life area)</p>
-              </div>
-            </div>
-
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-amber-100 text-amber-600 font-bold">4</div>
-              </div>
-              <div>
-                <h3 class="font-semibold text-gray-900">Plan & Track</h3>
-                <p class="text-gray-600 text-sm">Break goals into monthly milestones and daily habits</p>
-              </div>
-            </div>
-
-            <div class="flex gap-4">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-pink-100 text-pink-600 font-bold">5</div>
-              </div>
-              <div>
-                <h3 class="font-semibold text-gray-900">Reflect & Grow</h3>
-                <p class="text-gray-600 text-sm">Weekly, monthly, and yearly reflections to track progress</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p class="text-sm text-blue-900">
-              <strong>💡 Tip:</strong> The key is consistency over perfection. Start with your success definition, and we'll build everything else from there.
-            </p>
-          </div>
         </div>
 
         <!-- Success Definition Form -->

@@ -12,17 +12,19 @@ function loadMonthData() {
   const goals = JSON.parse(localStorage.getItem('yearlyGoals') || '[]');
   monthData.goals = goals;
 
-  // Initialize habits for current month (one habit per goal - up to 8)
-  if (localStorage.getItem('monthHabits')) {
-    monthData.habits = JSON.parse(localStorage.getItem('monthHabits'));
-  } else {
-    monthData.habits = goals.slice(0, 8).map((goal, index) => ({
+  // Load daily habits from planning step
+  const dailyHabitsMap = JSON.parse(localStorage.getItem('dailyHabits') || '{}');
+
+  // Initialize habits from goals
+  monthData.habits = goals.map((goal, index) => {
+    const habitTitle = dailyHabitsMap[`goal-${index}`] || `${goal.title} - Daily Action`;
+    return {
       id: `habit-${index}`,
       goalId: index,
-      title: `${goal.title} - Daily Action`,
+      title: habitTitle,
       completed: false,
-    }));
-  }
+    };
+  });
 
   // Load habit logs (completions)
   if (localStorage.getItem('habitLogs')) {
@@ -71,6 +73,13 @@ function isGoldenDay() {
 
 export function renderMonth(container) {
   loadMonthData();
+
+  // Debug logging
+  console.log('🔍 Month View Debug:');
+  console.log('  Goals:', monthData.goals.length);
+  console.log('  Habits:', monthData.habits.length);
+  console.log('  Goals data:', monthData.goals);
+  console.log('  Habits data:', monthData.habits);
 
   const today = new Date();
   const todayDateKey = today.toISOString().split('T')[0];

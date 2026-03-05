@@ -10,7 +10,13 @@ export async function renderAuth(container) {
   // Check if already logged in
   const user = await getCurrentUser();
   if (user) {
-    navigateTo('onboarding');
+    // Check if user already completed onboarding
+    const hasCompletedOnboarding = localStorage.getItem('onboardingComplete');
+    if (hasCompletedOnboarding) {
+      navigateTo('month');
+    } else {
+      navigateTo('onboarding');
+    }
     return;
   }
 
@@ -28,7 +34,7 @@ function renderLoginPage(container) {
           <p class="text-xl text-gray-600 mt-2">Build habits. Track progress. Achieve your goals.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <!-- Left Column: App Overview -->
           <div>
             <h2 class="text-3xl font-bold text-gray-900 mb-8">How It Works</h2>
@@ -98,8 +104,8 @@ function renderLoginPage(container) {
           </div>
 
           <!-- Right Column: Login Form -->
-          <div>
-            <div class="bg-white rounded-xl shadow-lg p-8 sticky top-8">
+          <div class="flex items-center justify-center min-h-[600px]">
+            <div class="bg-white rounded-xl shadow-lg p-8 sticky top-8 w-full">
               <h2 class="text-2xl font-bold text-gray-900 mb-6">Sign In</h2>
 
               <!-- Error Message -->
@@ -163,6 +169,21 @@ function renderLoginPage(container) {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Footer with Ko-fi -->
+        <div class="mt-16 border-t border-gray-300 pt-8">
+          <div class="text-center">
+            <p class="text-gray-600 mb-4">Love Goal Accelerator? Support the development</p>
+            <a
+              href="https://ko-fi.com/ntoweett"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white px-6 py-2 rounded-lg font-medium transition transform hover:scale-105">
+              ☕ Buy Me a Coffee
+            </a>
+            <p class="text-xs text-gray-500 mt-6">Goal Accelerator © 2026 | A minimalist PWA for goal tracking</p>
           </div>
         </div>
       </div>

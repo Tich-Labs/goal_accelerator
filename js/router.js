@@ -6,6 +6,7 @@ import { renderDashboard } from './views/dashboard.js';
 import { renderReflect } from './views/reflect.js';
 import { renderSettings } from './views/settings.js';
 import { renderYearlyReflection } from './views/yearlyReflection.js';
+import { renderAdmin } from './views/admin.js';
 import { getCurrentUser } from './supabase-config.js';
 
 const appContainer = document.getElementById('app');
@@ -19,6 +20,7 @@ const views = {
   reflect: renderReflect,
   settings: renderSettings,
   yearlyReflection: renderYearlyReflection,
+  admin: renderAdmin,
 };
 
 export function navigateTo(viewName) {
