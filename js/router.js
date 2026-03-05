@@ -8,6 +8,7 @@ import { renderSettings } from './views/settings.js';
 import { renderYearlyReflection } from './views/yearlyReflection.js';
 import { renderAdmin } from './views/admin.js';
 import { getCurrentUser } from './supabase-config.js';
+import { tracker } from './visitor-tracker.js';
 
 const appContainer = document.getElementById('app');
 
@@ -29,6 +30,9 @@ export function navigateTo(viewName) {
     console.error(`View "${viewName}" not found`);
     return;
   }
+
+  // Track page visit
+  tracker.trackPageVisit(viewName);
 
   // Clear the app container and render the new view
   appContainer.innerHTML = '';
