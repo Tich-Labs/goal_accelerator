@@ -34,12 +34,17 @@ export function renderPlanning(container) {
 
     cardsHTML += `
       <div class="${colors.bg} border-2 ${colors.border} rounded-lg p-6 shadow-sm">
-        <h3 class="font-semibold text-lg ${colors.text} mb-4">${goal.title}</h3>
+        <!-- Goal Header - Clearly Labeled -->
+        <div class="mb-6 pb-4 border-b-2 ${colors.border}">
+          <div class="text-xs font-bold ${colors.text} uppercase tracking-widest">📍 ${goal.area || goal.category}</div>
+          <h3 class="text-xl font-bold text-gray-900 mt-2">${goal.title}</h3>
+          ${goal.why ? `<p class="text-sm text-gray-600 mt-2 italic">"${goal.why}"</p>` : ''}
+        </div>
 
         <div class="space-y-4">
           <!-- Monthly Milestone Input -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">${currentMonth} Milestone</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">📅 ${currentMonth} Milestone</label>
             <input
               type="text"
               placeholder="What do you want to achieve this month?"
@@ -50,7 +55,7 @@ export function renderPlanning(container) {
 
           <!-- Daily Habit Input -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Daily Habit</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">⚡ Daily Habit</label>
             <input
               type="text"
               placeholder="What's your daily action?"
@@ -89,20 +94,24 @@ export function renderPlanning(container) {
     </div>
   `;
 
-  // Add event listeners for inputs
+  // Add event listeners for inputs - REAL-TIME saving
   document.querySelectorAll('.monthly-milestone').forEach((input) => {
-    input.addEventListener('change', (e) => {
+    // Save on 'input' event (real-time as user types)
+    input.addEventListener('input', (e) => {
       const goalId = e.target.dataset.goalId;
       planningData.monthlyGoals[goalId] = e.target.value;
       localStorage.setItem('monthlyGoals', JSON.stringify(planningData.monthlyGoals));
+      console.log(`✅ Saved milestone for ${goalId}:`, e.target.value);
     });
   });
 
   document.querySelectorAll('.daily-habit').forEach((input) => {
-    input.addEventListener('change', (e) => {
+    // Save on 'input' event (real-time as user types)
+    input.addEventListener('input', (e) => {
       const goalId = e.target.dataset.goalId;
       planningData.dailyHabits[goalId] = e.target.value;
       localStorage.setItem('dailyHabits', JSON.stringify(planningData.dailyHabits));
+      console.log(`✅ Saved habit for ${goalId}:`, e.target.value);
     });
   });
 

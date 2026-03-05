@@ -54,6 +54,13 @@ function renderDefineSuccess(container) {
       alert('Please define your success before continuing.');
     }
   });
+
+  // Auto-save success definition as user types
+  const successInput = document.getElementById('success-input');
+  successInput.addEventListener('input', (e) => {
+    onboardingState.successDefinition = e.target.value;
+    localStorage.setItem('successDefinition', e.target.value);
+  });
 }
 
 // Step 2: Wheel of Life with visual wheel chart
@@ -293,20 +300,24 @@ function renderYearlyGoals(container) {
     </div>
   `;
 
-  // Add event listeners
+  // Add event listeners - REAL-TIME saving
   document.querySelectorAll('.goal-title').forEach((input) => {
-    input.addEventListener('change', (e) => {
+    input.addEventListener('input', (e) => {
       const position = parseInt(e.target.dataset.position);
       onboardingState.yearlyGoals[position] = onboardingState.yearlyGoals[position] || {};
       onboardingState.yearlyGoals[position].title = e.target.value;
+      // Auto-save to localStorage while typing
+      localStorage.setItem('yearlyGoals', JSON.stringify(onboardingState.yearlyGoals));
     });
   });
 
   document.querySelectorAll('.goal-why').forEach((textarea) => {
-    textarea.addEventListener('change', (e) => {
+    textarea.addEventListener('input', (e) => {
       const position = parseInt(e.target.dataset.position);
       onboardingState.yearlyGoals[position] = onboardingState.yearlyGoals[position] || {};
       onboardingState.yearlyGoals[position].why = e.target.value;
+      // Auto-save to localStorage while typing
+      localStorage.setItem('yearlyGoals', JSON.stringify(onboardingState.yearlyGoals));
     });
   });
 
